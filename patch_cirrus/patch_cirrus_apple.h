@@ -154,8 +154,6 @@ struct sub_codec cs8409_cs42l83_codec = {
         .init_seq_num = ARRAY_SIZE(cs42l83_init_reg_seq),
         .hp_jack_in = 0,
         .mic_jack_in = 0,
-        .linein_jack_in = 0,
-        .force_status_change = 1,
         .paged = 1,
         .suspended = 1,
         .no_type_dect = 0,
@@ -2343,7 +2341,7 @@ static int cs8409_cs42l83_macbook_exec_verb(struct hdac_device *dev, unsigned in
                 }
         case CS8409_CS42L83_MACBOOK_LINEIN_PIN_NID:
                 if (verb == AC_VERB_GET_PIN_SENSE) {
-                        *res = (cs42l83->linein_jack_in) ? AC_PINSENSE_PRESENCE : 0;
+                        *res = (cs42l83->mic_jack_in) ? AC_PINSENSE_PRESENCE : 0;
                         return 0;
                 }
                 break;
@@ -2389,7 +2387,7 @@ static int cs8409_cs42l83_imac_exec_verb(struct hdac_device *dev, unsigned int c
                 break;
         case CS8409_CS42L83_IMAC_LINEIN_PIN_NID:
                 if (verb == AC_VERB_GET_PIN_SENSE) {
-                        *res = (cs42l83->linein_jack_in) ? AC_PINSENSE_PRESENCE : 0;
+                        *res = (cs42l83->mic_jack_in) ? AC_PINSENSE_PRESENCE : 0;
                         return 0;
                 }
                 break;
